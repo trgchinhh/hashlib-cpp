@@ -51,3 +51,8 @@ int main() {
 
     return 0;
 }
+
+// cách biên dịch 
+// g++ test_hashlib.cpp -o test_hashlib -lssl -lcrypto
+// hoặc
+// clang++ test_hashlib.cpp -o test_hashlib -lssl -lcrypto
