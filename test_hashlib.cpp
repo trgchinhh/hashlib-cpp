@@ -1,58 +1,120 @@
 #include <iostream>
-#include <fstream>
+#include <windows.h>
+#include <limits>
 #include <hashlib.h>
 
 using namespace std;
 using namespace hashlib;
 
-const string content = R"(Xin chào nha)";
+const string banner = R"( ╔═════════════════════════════════╗
+ ║          Hashlib C++            ║
+ ║  Simple C++ Hash Generator      ║
+ ║  Author : Truong Chinh          ║
+ ║  Github : Github.com/trgchinhh  ║
+ ╚═════════════════════════════════╝
 
-int main() {
-    string data = content;
-    string key = "secret"; // dùng cho HMAC
+)";
 
-    // ===== Tạo file "test.txt" =====
-    {
-        ofstream fout("test.txt", ios::binary);
-        fout << content;
-    }
-
-    // ===== Hash trực tiếp từ chuỗi =====
-    cout << "md5:      " << md5(data).hexdigest() << endl;
-    cout << "sha1:     " << sha1(data).hexdigest() << endl;
-    cout << "sha224:   " << sha224(data).hexdigest() << endl;
-    cout << "sha256:   " << sha256(data).hexdigest() << endl;
-    cout << "sha384:   " << sha384(data).hexdigest() << endl;
-    cout << "sha512:   " << sha512(data).hexdigest() << endl;
-
-    // ===== SHA3 =====
-    cout << "sha3-224: " << sha3_224(data).hexdigest() << endl;
-    cout << "sha3-256: " << sha3_256(data).hexdigest() << endl;
-    cout << "sha3-384: " << sha3_384(data).hexdigest() << endl;
-    cout << "sha3-512: " << sha3_512(data).hexdigest() << endl;
-
-    // ===== BLAKE2 =====
-    cout << "blake2b:  " << blake2b(data).hexdigest() << endl;
-    cout << "blake2s:  " << blake2s(data).hexdigest() << endl;
-
-    // ===== HMAC =====
-    cout << "HMAC-SHA256: " << hmac(key, data, "sha256") << endl;
-    cout << "HMAC-SHA1:   " << hmac(key, data, "sha1") << endl;
-
-    // ===== Hash file =====
-    cout << "Hash file (md5):      " << hash_file("test.txt", "md5") << endl;
-    cout << "Hash file (sha1):     " << hash_file("test.txt", "sha1") << endl;
-    cout << "Hash file (sha224):   " << hash_file("test.txt", "sha224") << endl;
-    cout << "Hash file (sha256):   " << hash_file("test.txt", "sha256") << endl;
-    cout << "Hash file (sha384):   " << hash_file("test.txt", "sha384") << endl;
-    cout << "Hash file (sha512):   " << hash_file("test.txt", "sha512") << endl;
-    cout << "Hash file (sha3-256): " << hash_file("test.txt", "sha3-256") << endl;
-    cout << "Hash file (blake2b512): " << hash_file("test.txt", "blake2b512") << endl;
-
-    return 0;
+void clear(){
+    system("cls");
 }
 
-// cách biên dịch 
-// g++ test_hashlib.cpp -o test_hashlib -lssl -lcrypto
-// hoặc
-// clang++ test_hashlib.cpp -o test_hashlib -lssl -lcrypto
+void dungchuongtrinh(){
+    cout << "\n\tNhấn phím enter để tiếp tục ..."; 
+    getchar();
+}
+
+void inbanner(const string tenbanner){
+    stringstream ss(tenbanner);
+    string line;
+    while (getline(ss, line)) {
+        cout << line << endl;
+    }
+}
+
+void inputdata(string& data){
+    inbanner(banner);
+    cout << " [?] Nhập dữ liệu: ";
+    getline(cin, data);
+}
+
+void display_data(string data){
+    cout << " [+] Data: " << data << "\n\n";
+}
+
+void menu(string data){
+    const int somuc = 14;
+    display_data(data);
+    string menu[somuc] = {
+        " [01] Enter new data",
+        " [02] Hash Md5",
+        " [03] Hash Sha1",
+        " [04] Hash Sha224",
+        " [05] Hash Sha256",
+        " [06] Hash Sha384",
+        " [07] Hash Sha512",
+        " [08] Hash Sha3-224",
+        " [09] Hash Sha3-256",
+        " [10] Hash Sha3-384",
+        " [11] Hash Sha3-512",
+        " [12] Hash Blake2b",
+        " [13] Hash Blake2s",
+        " [14] Exit\n"
+    };
+    for(int i = 0; i < somuc; i++){
+        cout << menu[i] << endl;
+    }
+}
+
+void hashlib_cpp(){
+    int chon;
+    string data;
+    if(data.empty()){
+        inputdata(data);
+    }
+
+    while(true){
+        clear();
+        inbanner(banner);
+
+        menu(data);
+        cout << " [-] Nhập lựa chọn: ";
+        int chon; cin >> chon;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        // hiển thị hash realtime
+        if(chon == 14){
+            cout << "\n" << "Goodbye !!!" << endl;
+            exit(0);
+        } else if(chon == 1){
+            system("cls");
+            inputdata(data);
+            continue;
+        } else if(chon > 1 and chon < 14){
+            cout << "\n\tResult: ";
+            if(chon == 2) cout << md5(data).hexdigest();
+            else if(chon == 3) cout << sha1(data).hexdigest();
+            else if(chon == 4) cout << sha224(data).hexdigest();
+            else if(chon == 5) cout << sha256(data).hexdigest();
+            else if(chon == 6) cout << sha384(data).hexdigest();
+            else if(chon == 7) cout << sha512(data).hexdigest();
+            else if(chon == 8) cout << sha3_224(data).hexdigest();
+            else if(chon == 9) cout << sha3_256(data).hexdigest();
+            else if(chon == 10) cout << sha3_384(data).hexdigest();
+            else if(chon == 11) cout << sha3_512(data).hexdigest();
+            else if(chon == 12) cout << blake2b(data).hexdigest();
+            else if(chon == 13) cout << blake2s(data).hexdigest();
+            cout << endl;
+        } else {
+            cout << "Nhập sai !" << endl;
+            exit(0);
+        }
+
+        dungchuongtrinh();
+    }
+}
+
+int main() {
+    hashlib_cpp();
+    return 0;
+}
