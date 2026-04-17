@@ -84,14 +84,14 @@ void hashlib_cpp(){
 
         // hiển thị hash realtime
         if(chon == 14){
-            cout << "\n" << "Goodbye !!!" << endl;
+            cout << "\n" << " Goodbye !!!" << endl;
             exit(0);
         } else if(chon == 1){
             system("cls");
             inputdata(data);
             continue;
         } else if(chon > 1 and chon < 14){
-            cout << "\n\tResult: ";
+            cout << "\n\t[*] Result: ";
             if(chon == 2) cout << md5(data).hexdigest();
             else if(chon == 3) cout << sha1(data).hexdigest();
             else if(chon == 4) cout << sha224(data).hexdigest();
@@ -106,7 +106,7 @@ void hashlib_cpp(){
             else if(chon == 13) cout << blake2s(data).hexdigest();
             cout << endl;
         } else {
-            cout << "Nhập sai !" << endl;
+            cout << " [x] Nhập sai !" << endl;
             exit(0);
         }
 
