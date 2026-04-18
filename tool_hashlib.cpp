@@ -43,7 +43,7 @@ void display_data(string data){
 }
 
 void menu(string data){
-    const int somuc = 14;
+    const int somuc = 15;
     display_data(data);
     string menu[somuc] = {
         " [01] Enter new data",
@@ -59,7 +59,8 @@ void menu(string data){
         " [11] Hash Sha3-512",
         " [12] Hash Blake2b",
         " [13] Hash Blake2s",
-        " [14] Exit\n"
+        " [14] All Hash",
+        " [15] Exit\n"
     };
     for(int i = 0; i < somuc; i++){
         cout << menu[i] << endl;
@@ -83,7 +84,7 @@ void hashlib_cpp(){
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         // hiển thị hash realtime
-        if(chon == 14){
+        if(chon == 15){
             cout << "\n" << " Goodbye !!!" << endl;
             exit(0);
         } else if(chon == 1){
@@ -105,6 +106,20 @@ void hashlib_cpp(){
             else if(chon == 12) cout << blake2b(data).hexdigest();
             else if(chon == 13) cout << blake2s(data).hexdigest();
             cout << endl;
+        } else if(chon == 14){
+            cout << "\n [*] All Hash Result:\n\n";
+            cout << "\tMd5        : " << md5(data).hexdigest() << endl;
+            cout << "\tSha1       : " << sha1(data).hexdigest() << endl;
+            cout << "\tSha224     : " << sha224(data).hexdigest() << endl;
+            cout << "\tSha256     : " << sha256(data).hexdigest() << endl;
+            cout << "\tSha384     : " << sha384(data).hexdigest() << endl;
+            cout << "\tSha512     : " << sha512(data).hexdigest() << endl;
+            cout << "\tSha3-224   : " << sha3_224(data).hexdigest() << endl;
+            cout << "\tSha3-256   : " << sha3_256(data).hexdigest() << endl;
+            cout << "\tSha3-384   : " << sha3_384(data).hexdigest() << endl;
+            cout << "\tSha3-512   : " << sha3_512(data).hexdigest() << endl;
+            cout << "\tBlake2b    : " << blake2b(data).hexdigest() << endl;
+            cout << "\tBlake2s    : " << blake2s(data).hexdigest() << endl;
         } else {
             cout << " [x] Nhập sai !" << endl;
             exit(0);
