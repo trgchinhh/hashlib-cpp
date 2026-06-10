@@ -28,7 +28,7 @@ g++ main.cpp -o main.exe -lssl -lcrypto
 main.exe
 ```
 
-### Kết quả của file test_hashlib.cpp
+### Kết quả của file tool_hashlib.cpp
 <img width="1919" height="1050" alt="image" src="https://github.com/user-attachments/assets/c07c1a5f-b811-448d-b470-252f082b666d" />
 
 ## Cách dùng 
